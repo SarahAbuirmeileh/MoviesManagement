@@ -3,19 +3,18 @@ const { readTheFile, writeToFile } = require('./handlingFile');
 // Save in array
 let movies = [];
 
-const getMovies = async() => {
-      const data = await readTheFile('films.json', "utf-8", (err,data)=>{
-        if (err){
-            console.log("An error happened while reading the file")
-            console.log(err)
-        }else{
-            console.log("Bringing the data has been made successfully! ")
-        }
-    }); 
-    // bring the data from the json file using async/await
-    movies = JSON.parse(data); // paring it to json
-  }
-
+const getMovies = () => {
+  readTheFile('FilmsProject/films.json')
+    .then((data) => {
+      movies = JSON.parse(data);
+      console.log('Movies loaded successfully!');
+      console.log(movies);
+    })
+    .catch((err) => {
+      console.log('An error occurred  ^_^');
+      console.log(err);
+    });
+}
 
   function printTitles() {
     movies.forEach((f, i) => {
@@ -26,15 +25,16 @@ const getMovies = async() => {
 
 // to store the last updates for the movies after evry change beacuse i will use it many times
 const storeMovies =  async() => {
-    const data = JSON.stringify(movies);
-    await writeToFile('films.json', data, "utf-8", (err,data)=>{
-        if (err){
-            console.log("An error happened")
-            console.log(err)
-        }else{
-            console.log('The changes has been saved successfully!');
-        }
-    });
+  const data =  JSON.stringify(movies);
+  console.log(typeof data)
+  await writeToFile('FilmsProject/films.json', data)
+  .then(()=>{
+      console.log("successfully!!")
+  })
+  .catch(err=>{
+      console.log("An error happened ^_^")
+      console.log(err)
+  });
 }
 
 const addMovie = movie=> {
@@ -55,7 +55,6 @@ const searchByTitle= title => {
     const r = movies.filter((movie) =>{
         return movie.Title.toLowerCase()=== title.toLowerCase()
     });
-
     r.forEach((f, i) => {
         console.log(`${i+1}. ${f.Title}`);
     });
@@ -91,12 +90,12 @@ const searchByGenre =genre=> {
 }
 
 module.exports = {
-  getMovies,
   printTitles,
+  getMovies,
   addMovie,
   editMovie,
   deleteMovie,
   searchByTitle,
   searchByDirector,
-  searchByGenre,
+  searchByGenre
 };

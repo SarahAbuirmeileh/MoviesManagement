@@ -1,19 +1,18 @@
 const fs = require('fs');
 
-const readTheFile = file=> {
-    let p =  new Promise((res, rej) => {
-        fs.readFile(file, 'utf-8', ( err , data ) => {
-            if (err) {
-                rej(err);
-            }else {
-                res(data);
-            } 
-        });
+const readTheFile = (file) => {
+    return new Promise((resolve, reject) => {
+      fs.readFile(file, 'utf-8', (err, data) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(data);
+        }
+      });
     });
-    return p;
-}
+  }
 
-const writeToFile= (file, data)=>{
+  const writeToFile= (file, data)=>{
     const p =  new Promise((res, rej) => {
         fs.writeFile(file, data, 'utf-8', (err) => {
             if (err){
@@ -29,5 +28,5 @@ const writeToFile= (file, data)=>{
 
 module.exports = {
   readTheFile,
-  writeToFile,
+  writeToFile
 };
