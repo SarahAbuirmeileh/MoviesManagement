@@ -1,6 +1,5 @@
 const readline = require('readline');
-const {printTitles, addMovie, deleteMovie, searchByTitle, searchByDirector, searchByGenre} = require('./movieManagement');
-const {  writeToFile } = require('./handlingFile');
+const {printTitles,storeMovies, addMovie, deleteMovie, searchByTitle, searchByDirector, searchByGenre} = require('./movieManagement');
 const { fetchMovie } = require('./APIRequests');
 
 
@@ -58,7 +57,6 @@ const userChoice=  async ()=> {
         const country = await getInput("Enter the country");
 
         addMovie(title, year, runtime, director, genre, language, country);
-        writeToFile(); // to save the changes
         break;
 
     case "3":
@@ -68,14 +66,12 @@ const userChoice=  async ()=> {
         const newValue = await getInput("Enter the new value");
 
         editMovie(index, attribute, newValue);
-        writeToFile();
         break;
 
     case "4":
       printTitles()
       const deleteIndex = await getInput("Enter the index of the movie to delete");
       deleteMovie(deleteIndex);
-      writeToFile();
       break;
 
     case "5":
@@ -97,7 +93,7 @@ const userChoice=  async ()=> {
         const key = await getInput("Enter the key:");
         const theTitle = await getInput("Enter the title:");
         await fetchMovie(key,theTitle);
-        writeToFile();
+        storeMovies();
         console.log("Movie data fetched and saved to file ^-^ ");
       break;
 

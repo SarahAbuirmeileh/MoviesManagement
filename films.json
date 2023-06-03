@@ -1,1 +1,29 @@
-[{"Title":"sarah"}]
+[
+    {
+      "Title": "Avatar",
+      "Year": "2009",
+      "Runtime": "162 min",
+      "Director": "James Cameron",
+      "Genre": "Action, Adventure, Fantasy",
+      "Language": "English, Spanish",
+      "Country": "USA, UK"
+    },
+    {
+      "Title": "The Avengers",
+      "Year": "2012",
+      "Runtime": "143 min",
+      "Director": "Joss Whedon",
+      "Genre": "Action, Sci-Fi, Thriller",
+      "Language": "English, Russian",
+      "Country": "USA"
+    },
+    {
+      "Title": "Interstellar",
+      "Year": "2014",
+      "Runtime": "169 min",
+      "Director": "Christopher Nolan",
+      "Genre": "Adventure, Drama, Sci-Fi",
+      "Language": "English",
+      "Country": "USA, UK"
+    }
+  ]
